@@ -1,0 +1,11 @@
+{
+  "cleanUrls": true,
+  "buildCommand": "cd hms-frontend && npm install && npm run build",
+  "outputDirectory": "hms-frontend/dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
