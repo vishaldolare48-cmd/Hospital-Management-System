@@ -23,8 +23,9 @@ import { ReportsModule } from './reports/reports.module';
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'hms-frontend', 'dist'),
-      exclude: ['/api*'],
+      exclude: ['/api*splat'],
     }),
+
     AuthModule,
     UsersModule,
     MedicinesModule,
