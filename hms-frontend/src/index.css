@@ -1,0 +1,225 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors - Light Theme with Blue/Indigo Accents */
+  --color-bg-primary: #f8fafc;
+  --color-bg-surface: #ffffff;
+  --color-bg-surface-alt: #f1f5f9;
+  --color-bg-surface-hover: #f8fafc;
+  --color-bg-glass: rgba(255, 255, 255, 0.85);
+  --color-bg-input: #ffffff;
+  --color-bg-sidebar: #ffffff;
+
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-accent-light: rgba(37, 99, 235, 0.08);
+  --color-accent-secondary: #0ea5e9;
+  --color-accent-secondary-light: rgba(14, 165, 233, 0.08);
+
+  --color-danger: #ef4444;
+  --color-danger-light: rgba(239, 68, 68, 0.08);
+  --color-warning: #f59e0b;
+  --color-warning-light: rgba(245, 158, 11, 0.08);
+  --color-success: #10b981;
+  --color-success-light: rgba(16, 185, 129, 0.08);
+  --color-info: #3b82f6;
+  --color-info-light: rgba(59, 130, 246, 0.08);
+  --color-purple: #8b5cf6;
+  --color-purple-light: rgba(139, 92, 246, 0.08);
+
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+  --color-text-inverse: #ffffff;
+
+  --color-border: rgba(148, 163, 184, 0.15);
+  --color-border-strong: rgba(148, 163, 184, 0.3);
+
+  /* Font */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.3s ease forwards;
+  --animate-fade-in-up: fade-in-up 0.4s ease forwards;
+  --animate-scale-in: scale-in 0.2s ease forwards;
+  --animate-slide-in-right: slide-in-right 0.3s ease forwards;
+  --animate-spin-slow: spin 1.2s linear infinite;
+
+  /* AuraHealth Theme Colors */
+  --color-primary: #091426;
+  --color-secondary: #0058be;
+  --color-secondary-container: #2170e4;
+  --color-primary-fixed: #d8e3fb;
+  --color-primary-fixed-dim: #bcc7de;
+  --color-surface-bright: #f7f9fb;
+  --color-on-surface-variant: #45474c;
+  --color-on-surface: #191c1e;
+  --color-surface-container-low: #f2f4f6;
+  --color-outline-variant: #c5c6cd;
+  --color-outline: #75777d;
+  --color-background: #f7f9fb;
+  --color-on-background: #191c1e;
+  --color-secondary-fixed: #d8e2ff;
+  --color-tertiary-container: #0d0093;
+  --color-tertiary: #040057;
+  --color-tertiary-fixed-dim: #c0c1ff;
+  --color-tertiary-fixed: #e1e0ff;
+  --color-on-tertiary-fixed: #07006c;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ─── Base ─── */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(37, 99, 235, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(14, 165, 233, 0.04) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-text-muted); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-secondary); }
+
+::selection { background-color: var(--color-accent); color: var(--color-text-inverse); }
+
+/* ─── AuraHealth Custom Styling & Typography ─── */
+.glass-surface {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-sidebar {
+  background: rgba(9, 20, 38, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.vibrant-gradient {
+  background: linear-gradient(135deg, #091426 0%, #0058be 100%);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.active-glow {
+  box-shadow: 0 0 15px rgba(33, 112, 228, 0.4);
+  position: relative;
+}
+
+.active-glow::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 25%;
+  bottom: 25%;
+  width: 3px;
+  background: linear-gradient(to bottom, #ff9e7d, #ff5e3a);
+  border-radius: 4px;
+  animation: linePulse 2s infinite ease-in-out;
+}
+
+@keyframes linePulse {
+  0%, 100% { height: 20%; opacity: 0.5; }
+  50% { height: 50%; opacity: 1; }
+}
+
+.notification-pulse {
+  position: relative;
+}
+
+.notification-pulse::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 8px;
+  height: 8px;
+  background-color: #ba1a1a;
+  border-radius: 50%;
+  border: 2px solid white;
+  animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(.33); }
+  80%, 100% { opacity: 0; }
+}
+
+.transition-sidebar {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.p-margin-desktop {
+  padding: 32px;
+}
+
+/* Material Symbols Outlined settings */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Custom Aura Typography Classes */
+.font-label-md { font-family: 'Inter', sans-serif; }
+.text-label-md { font-size: 12px; line-height: 16px; letter-spacing: 0.05em; font-weight: 600; }
+
+.font-title-md { font-family: 'Outfit', sans-serif; }
+.text-title-md { font-size: 20px; line-height: 28px; font-weight: 500; }
+
+.font-body-lg { font-family: 'Inter', sans-serif; }
+.text-body-lg { font-size: 16px; line-height: 24px; font-weight: 400; }
+
+.font-display-lg { font-family: 'Outfit', sans-serif; }
+.text-display-lg { font-size: 48px; line-height: 56px; letter-spacing: -0.02em; font-weight: 700; }
+
+.font-headline-lg-mobile { font-family: 'Outfit', sans-serif; }
+.text-headline-lg-mobile { font-size: 24px; line-height: 32px; font-weight: 600; }
+
+.font-body-md { font-family: 'Inter', sans-serif; }
+.text-body-md { font-size: 14px; line-height: 20px; font-weight: 400; }
+
+.font-headline-lg { font-family: 'Outfit', sans-serif; }
+.text-headline-lg { font-size: 32px; line-height: 40px; letter-spacing: -0.01em; font-weight: 600; }
+
+/* Custom Aura Input Outline Overrides */
+.glass-surface input:focus, .glass-surface select:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(0, 88, 190, 0.2);
+}
+
