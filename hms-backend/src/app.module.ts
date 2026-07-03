@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
@@ -19,6 +21,10 @@ import { ReportsModule } from './reports/reports.module';
         uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/hms',
       }),
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', 'hms-frontend', 'dist'),
+      exclude: ['/api*'],
+    }),
     AuthModule,
     UsersModule,
     MedicinesModule,
@@ -31,4 +37,5 @@ import { ReportsModule } from './reports/reports.module';
   providers: [AppService],
 })
 export class AppModule { }
+
 
