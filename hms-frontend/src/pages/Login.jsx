@@ -161,11 +161,6 @@ export default function Login() {
                 </div>
               </div>
 
-              {/* Keep me logged in */}
-              <div className="flex items-center space-x-2">
-                <input className="w-4 h-4 rounded text-secondary border-outline-variant focus:ring-secondary/20" id="remember" type="checkbox" />
-                <label className="font-body-md text-xs text-on-surface-variant cursor-pointer" htmlFor="remember">Keep me logged in</label>
-              </div>
 
               {/* Submit Button */}
               <button 
