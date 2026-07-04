@@ -1,6 +1,7 @@
-export const API_BASE_URL = typeof window !== 'undefined' && window.location.hostname === 'localhost'
-  ? 'http://localhost:3000'
-  : window.location.origin;
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 
+  (typeof window !== 'undefined' && window.location.hostname === 'localhost'
+    ? 'http://localhost:3000'
+    : 'https://hospital-management-system-backend-production-5f06.up.railway.app');
 
 export const ROLES = {
   ADMIN: 'admin',
