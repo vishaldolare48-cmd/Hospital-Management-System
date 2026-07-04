@@ -1,6 +1,6 @@
 {
   "cleanUrls": true,
-  "buildCommand": "cd hms-frontend && npm install && npm run build",
+  "buildCommand": "cd hms-frontend && npm install --include=dev && npm run build",
   "outputDirectory": "hms-frontend/dist",
   "rewrites": [
     {
