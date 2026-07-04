@@ -2,8 +2,10 @@
   "cleanUrls": true,
   "buildCommand": "cd hms-frontend && npm install && npm run build",
   "outputDirectory": "hms-frontend/dist",
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "rewrites": [
+    {
+      "source": "/((?!assets/|static/|favicon.ico).*)",
+      "destination": "/index.html"
+    }
   ]
 }
