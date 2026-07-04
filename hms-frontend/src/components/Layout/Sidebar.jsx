@@ -44,90 +44,107 @@ const getRoleBadgeClass = (role) => {
   }
 };
 
-export default function Sidebar({ collapsed, onToggle }) {
+export default function Sidebar({ collapsed, onToggle, mobileOpen, setMobileOpen }) {
   const { user, logout } = useAuth();
   const items = NAV_ITEMS[user?.role] || [];
 
-  return (
-    <aside className={`fixed left-4 top-4 bottom-4 glass-sidebar rounded-xl z-50 transition-sidebar flex flex-col p-5 shadow-[20px_0_40px_rgba(30,41,59,0.05)] select-none ${collapsed ? 'w-20' : 'w-72'}`}>
-      {/* Brand Logo */}
-      <div className="flex items-center gap-3 mb-8 px-1">
-        <div className="w-9 h-9 bg-secondary-container rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0">
-          A
-        </div>
-        {!collapsed && (
-          <span className="font-headline-lg text-lg text-white tracking-tight">AuraHealth</span>
-        )}
-      </div>
+  const handleLinkClick = () => {
+    if (window.innerWidth < 1024) {
+      setMobileOpen(false);
+    }
+  };
 
-      {/* Navigation list */}
-      <nav className="flex-1 space-y-6 overflow-y-auto pr-1">
-        <div>
-          {!collapsed && (
-            <p className="text-slate-400 font-label-md text-[10px] px-3 mb-3 uppercase tracking-widest">
+  return (
+    <>
+      {/* Dark backdrop overlay for mobile */}
+      {mobileOpen && (
+        <div 
+          className="fixed inset-0 bg-slate-950/65 backdrop-blur-sm z-45 lg:hidden transition-opacity duration-300"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
+      <aside className={`fixed top-4 bottom-4 glass-sidebar rounded-xl z-50 transition-all duration-300 flex flex-col p-5 shadow-[20px_0_40px_rgba(30,41,59,0.05)] select-none
+        lg:left-4 ${collapsed ? 'lg:w-20' : 'lg:w-72'}
+        max-lg:left-0 max-lg:top-0 max-lg:bottom-0 max-lg:rounded-none max-lg:w-72
+        ${mobileOpen ? 'max-lg:translate-x-0' : 'max-lg:-translate-x-full'}`}>
+        
+        {/* Brand Logo */}
+        <div className="flex items-center gap-3 mb-8 px-1">
+          <div className="w-9 h-9 bg-secondary-container rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0">
+            A
+          </div>
+          <span className={`font-headline-lg text-lg text-white tracking-tight ${collapsed ? 'lg:hidden' : 'lg:inline'}`}>
+            AuraHealth
+          </span>
+        </div>
+
+        {/* Navigation list */}
+        <nav className="flex-1 space-y-6 overflow-y-auto pr-1">
+          <div>
+            <p className={`text-slate-400 font-label-md text-[10px] px-3 mb-3 uppercase tracking-widest ${collapsed ? 'lg:hidden' : 'lg:block'}`}>
               Console Navigation
             </p>
-          )}
-          <ul className="space-y-1.5">
-            {items.map(item => (
-              <li key={item.to}>
-                <NavLink
-                  to={item.to}
-                  className={({ isActive }) =>
-                    `flex items-center gap-3 px-3.5 py-2.5 rounded-full transition-all duration-200 relative whitespace-nowrap group
-                    ${isActive
-                      ? 'bg-gradient-to-r from-secondary/80 to-secondary-container text-white active-glow'
-                      : 'text-slate-400 hover:text-white hover:bg-white/5 hover:translate-x-1'}`
-                  }
-                >
-                  <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
-                  {!collapsed && <span className="font-title-md text-xs font-medium">{item.label}</span>}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
-
-      {/* Profile and Logout Section */}
-      <div className="mt-4 pt-4 border-t border-white/10">
-        <div className="flex items-center gap-2.5 p-2 bg-white/5 rounded-2xl">
-          <div className="relative flex-shrink-0">
-            <div className="w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center text-xs font-bold text-white border-2 border-secondary-container">
-              {getInitials(user?.name)}
-            </div>
-            <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-primary rounded-full"></div>
+            <ul className="space-y-1.5">
+              {items.map(item => (
+                <li key={item.to}>
+                  <NavLink
+                    to={item.to}
+                    onClick={handleLinkClick}
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3.5 py-2.5 rounded-full transition-all duration-200 relative whitespace-nowrap group
+                      ${isActive
+                        ? 'bg-gradient-to-r from-secondary/80 to-secondary-container text-white active-glow'
+                        : 'text-slate-400 hover:text-white hover:bg-white/5 hover:translate-x-1'}`
+                    }
+                  >
+                    <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
+                    <span className={`font-title-md text-xs font-medium ${collapsed ? 'lg:hidden' : 'lg:inline'}`}>
+                      {item.label}
+                    </span>
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
           </div>
-          {!collapsed && (
-            <div className="flex-1 overflow-hidden">
+        </nav>
+
+        {/* Profile and Logout Section */}
+        <div className="mt-4 pt-4 border-t border-white/10">
+          <div className="flex items-center gap-2.5 p-2 bg-white/5 rounded-2xl">
+            <div className="relative flex-shrink-0">
+              <div className="w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center text-xs font-bold text-white border-2 border-secondary-container">
+                {getInitials(user?.name)}
+              </div>
+              <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-primary rounded-full"></div>
+            </div>
+            <div className={`flex-1 overflow-hidden ${collapsed ? 'lg:hidden' : 'lg:block'}`}>
               <p className="text-white font-semibold text-xs truncate leading-snug">{user?.name}</p>
               <p className="text-slate-400 text-[10px] truncate capitalize">{user?.role}</p>
             </div>
-          )}
-          {!collapsed && (
-            <div className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tighter shrink-0 ${getRoleBadgeClass(user?.role)}`}>
+            <div className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-tighter shrink-0 ${getRoleBadgeClass(user?.role)} ${collapsed ? 'lg:hidden' : 'lg:block'}`}>
               {user?.role}
             </div>
-          )}
+          </div>
+          
+          <button 
+            onClick={logout}
+            className="mt-3 flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-colors py-1.5 w-full text-xs font-label-md"
+          >
+            <span className="material-symbols-outlined text-[18px]">logout</span>
+            <span className={collapsed ? 'lg:hidden' : 'lg:inline'}>Sign Out</span>
+          </button>
         </div>
-        
-        <button 
-          onClick={logout}
-          className="mt-3 flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-colors py-1.5 w-full text-xs font-label-md"
-        >
-          <span className="material-symbols-outlined text-[18px]">logout</span>
-          {!collapsed && <span>Sign Out</span>}
-        </button>
-      </div>
 
-      {/* Collapse/Expand Toggle floating control */}
-      <button
-        onClick={onToggle}
-        className="absolute top-5 -right-3 w-6 h-6 bg-secondary-container border border-white/10 rounded-full flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-all text-xs z-50 shadow-md cursor-pointer"
-        title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
-      >
-        {collapsed ? '→' : '←'}
-      </button>
-    </aside>
+        {/* Collapse/Expand Toggle floating control */}
+        <button
+          onClick={onToggle}
+          className="absolute top-5 -right-3 w-6 h-6 bg-secondary-container border border-white/10 rounded-full flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-all text-xs z-50 shadow-md cursor-pointer max-lg:hidden"
+          title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+        >
+          {collapsed ? '→' : '←'}
+        </button>
+      </aside>
+    </>
   );
 }

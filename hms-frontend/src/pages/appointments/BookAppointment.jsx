@@ -132,7 +132,7 @@ export default function BookAppointment() {
         {availableSlots.length > 0 && (
           <div>
             <label className="block text-sm font-medium text-text-secondary mb-2">Available Time Slots *</label>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {availableSlots.map(slot => (
                 <button
                   key={slot}

@@ -88,7 +88,7 @@ export default function BillDetail() {
           </span>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
           <div><span className="text-text-muted">Issued to:</span> <p className="text-text-primary font-bold mt-0.5">{bill.patientId?.name}</p></div>
           <div><span className="text-text-muted">Issued Date:</span> <p className="text-text-primary font-bold mt-0.5">{formatDate(bill.createdAt)}</p></div>
         </div>

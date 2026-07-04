@@ -103,7 +103,7 @@ export default function AppointmentDetail() {
 
         <div className="bg-bg-surface-alt border border-border rounded-xl p-4 text-sm space-y-3">
           <h3 className="font-semibold text-text-primary">Schedule</h3>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div><span className="text-text-muted">Date:</span> <span className="text-text-primary font-medium ml-1">{formatDate(appointment.date)}</span></div>
             <div><span className="text-text-muted">Time Slot:</span> <span className="text-text-primary font-mono ml-1">{appointment.timeSlot}</span></div>
           </div>

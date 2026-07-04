@@ -75,7 +75,7 @@ export default function CreateStaff() {
           </select>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-text-secondary mb-2">Full Name *</label>
             <input
@@ -99,7 +99,7 @@ export default function CreateStaff() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-text-secondary mb-2">Email Address *</label>
             <input
@@ -127,7 +127,7 @@ export default function CreateStaff() {
         {role === 'doctor' && (
           <div className="pt-4 border-t border-border space-y-4">
             <h3 className="text-sm font-bold text-text-primary">Doctor Information</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-semibold text-text-secondary mb-2">Specialization</label>
                 <input

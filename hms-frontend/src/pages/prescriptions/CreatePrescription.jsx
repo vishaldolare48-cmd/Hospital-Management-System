@@ -97,7 +97,7 @@ export default function CreatePrescription() {
       </div>
 
       <form onSubmit={handleSubmit} className="bg-bg-surface border border-border rounded-2xl p-6 space-y-6">
-        <div className="grid grid-cols-2 gap-4 text-xs bg-bg-surface-alt border border-border p-4 rounded-xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs bg-bg-surface-alt border border-border p-4 rounded-xl">
           <div><span className="text-text-muted">Patient:</span> <span className="text-text-primary font-bold ml-1">{appointment.patientId?.name}</span></div>
           <div><span className="text-text-muted">Doctor:</span> <span className="text-text-primary font-bold ml-1">{appointment.doctorId?.name}</span></div>
         </div>

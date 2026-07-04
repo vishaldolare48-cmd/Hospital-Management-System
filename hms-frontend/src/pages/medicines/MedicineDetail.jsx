@@ -120,7 +120,7 @@ export default function MedicineDetail() {
                 required
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-semibold text-text-secondary mb-1">Unit Price (₹)</label>
                 <input
@@ -161,7 +161,7 @@ export default function MedicineDetail() {
             </div>
           </form>
         ) : (
-          <div className="grid grid-cols-2 gap-6 text-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
             <div className="bg-bg-surface-alt border border-border rounded-xl p-4">
               <span className="text-text-muted">Unit Price</span>
               <p className="text-lg font-bold text-text-primary mt-1">{formatCurrency(medicine.unitPrice)}</p>
@@ -172,7 +172,7 @@ export default function MedicineDetail() {
                 {medicine.stockQty} units {medicine.stockQty < 10 && '⚠️'}
               </p>
             </div>
-            <div className="col-span-2 bg-bg-surface-alt border border-border rounded-xl p-4">
+            <div className="col-span-1 sm:col-span-2 bg-bg-surface-alt border border-border rounded-xl p-4">
               <span className="text-text-muted">Expiry Date</span>
               <p className="text-sm font-semibold text-text-primary mt-1">{formatDate(medicine.expiryDate)}</p>
             </div>

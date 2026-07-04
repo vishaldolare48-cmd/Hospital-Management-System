@@ -82,7 +82,7 @@ export default function PatientDetail() {
         {patient.emergencyContact && (
           <div>
             <h3 className="text-sm font-semibold text-text-secondary mb-2">Emergency Contact</h3>
-            <div className="bg-bg-surface-alt rounded-xl p-4 text-sm grid grid-cols-3 gap-4">
+            <div className="bg-bg-surface-alt rounded-xl p-4 text-sm grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div><span className="text-text-muted">Name:</span> <span className="text-text-primary ml-1">{patient.emergencyContact.name}</span></div>
               <div><span className="text-text-muted">Phone:</span> <span className="text-text-primary ml-1">{patient.emergencyContact.phone}</span></div>
               <div><span className="text-text-muted">Relation:</span> <span className="text-text-primary ml-1">{patient.emergencyContact.relation}</span></div>
