@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 
 const ToastContext = createContext(null);
 
@@ -21,6 +21,17 @@ export function ToastProvider({ children }) {
     info: (msg) => addToast(msg, 'info'),
     warning: (msg) => addToast(msg, 'warning'),
   };
+
+  useEffect(() => {
+    const handleEvent = (e) => {
+      const { message, type } = e.detail || {};
+      if (message) {
+        addToast(message, type);
+      }
+    };
+    window.addEventListener('hms-toast', handleEvent);
+    return () => window.removeEventListener('hms-toast', handleEvent);
+  }, [addToast]);
 
   return (
     <ToastContext.Provider value={toast}>

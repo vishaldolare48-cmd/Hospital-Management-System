@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { addStatusListener } from '../../utils/syncService';
 
 const getPageLabel = (segment) => {
   const labels = {
@@ -24,6 +25,15 @@ export default function Header({ onMenuToggle }) {
   const { user } = useAuth();
   const location = useLocation();
   const pathSegments = location.pathname.split('/').filter(Boolean);
+
+  const [networkStatus, setNetworkStatus] = useState({ isOnline: true, isSyncing: false });
+
+  useEffect(() => {
+    const unsubscribe = addStatusListener((status) => {
+      setNetworkStatus(status);
+    });
+    return unsubscribe;
+  }, []);
 
   const getCTA = () => {
     if (user?.role === 'doctor') {
@@ -95,6 +105,24 @@ export default function Header({ onMenuToggle }) {
 
       {/* Actions Section */}
       <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+        {/* Connection & Sync Status Badge */}
+        {networkStatus.isSyncing ? (
+          <div className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-warning-light text-warning animate-pulse border border-warning/20" title="Syncing offline changes...">
+            <span className="material-symbols-outlined text-[15px] animate-spin">sync</span>
+            <span className="hidden xs:inline">Syncing...</span>
+          </div>
+        ) : !networkStatus.isOnline ? (
+          <div className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-danger-light text-danger border border-danger/20" title="Working offline. Changes will be saved locally.">
+            <span className="material-symbols-outlined text-[15px]">cloud_off</span>
+            <span className="hidden xs:inline">Offline</span>
+          </div>
+        ) : (
+          <div className="flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-success-light text-success border border-success/20" title="Connected to HMS server">
+            <span className="material-symbols-outlined text-[15px]">cloud_queue</span>
+            <span className="hidden xs:inline">Online</span>
+          </div>
+        )}
+
         <button className="p-2 rounded-full hover:bg-surface-container text-on-surface-variant transition-colors notification-pulse">
           <span className="material-symbols-outlined text-[22px]">notifications</span>
         </button>

@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { ROLES } from '../../utils/constants';
 import { getInitials } from '../../utils/formatters';
+import logo from '../../assets/logo.png';
 
 const NAV_ITEMS = {
   [ROLES.ADMIN]: [
@@ -71,10 +72,8 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, setMobileOpen
         
         {/* Brand Logo */}
         <div className="flex items-center gap-3 mb-8 px-1">
-          <div className="w-9 h-9 bg-secondary-container rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0">
-            A
-          </div>
-          <span className={`font-headline-lg text-lg text-white tracking-tight ${collapsed ? 'lg:hidden' : 'lg:inline'}`}>
+          <img src={logo} alt="AuraHealth Logo" className="w-12 h-12 object-contain rounded-lg flex-shrink-0" />
+          <span className={`font-headline-lg text-xl text-white font-bold tracking-tight ${collapsed ? 'lg:hidden' : 'lg:inline'}`}>
             AuraHealth
           </span>
         </div>

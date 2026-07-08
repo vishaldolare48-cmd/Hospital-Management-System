@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
+import { initSync } from '../../utils/syncService';
 
 export default function Layout() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    return initSync();
+  }, []);
 
   return (
     <div className="min-h-screen bg-surface-bright text-on-surface font-body-md antialiased transition-colors duration-200">
